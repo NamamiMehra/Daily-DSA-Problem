@@ -1,0 +1,32 @@
+class Solution {
+    public String smallestSubsequence(String s) {
+        Stack<Character> st = new Stack<>();
+        Map<Character,Integer> hmap = new HashMap<>();
+        Set<Character>  set = new HashSet<>();
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            int temp = hmap.getOrDefault(ch,0);
+            hmap.put(ch,temp+1);
+        }
+        for(int j=0;j<s.length();j++){
+            char c = s.charAt(j);
+            hmap.put(c,hmap.get(c)-1);
+            if(set.contains(c)){
+                continue;
+            }
+            while(st.size()>0 && st.peek()>c && hmap.get(st.peek())>0){
+                char removed = st.pop();
+                set.remove(removed);
+            }
+            st.push(c); 
+            set.add(c);
+        }
+        StringBuilder str = new StringBuilder();
+        while(st.size()!=0){
+            str.append(st.pop());
+        }
+        str.reverse();
+       
+        return str.toString();
+    }
+}
