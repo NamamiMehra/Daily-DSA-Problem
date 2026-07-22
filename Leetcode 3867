@@ -1,0 +1,38 @@
+class Solution {
+    public long gcdSum(int[] nums) {
+        int n = nums.length;
+        int sum=0;
+        int[] prefixmax = new int[n];
+        prefixmax[0]=nums[0];
+        for(int i=1;i<n;i++){
+            prefixmax[i]=Math.max(prefixmax[i-1],nums[i]);
+        }
+        List<Integer>  list = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            list.add(gcd(nums[i],prefixmax[i]));
+        }
+        Collections.sort(list);
+        while(list.size()!=0){
+            if(list.size()==1){
+                break;
+            }
+            int small = list.get(0);
+            int max = list.get(list.size()-1);
+            int pp = gcd(small,max);
+            sum = sum +pp;
+            System.out.println(small);
+            System.out.println(max);
+            list.remove(Integer.valueOf(small));
+            list.remove(Integer.valueOf(max));
+        }
+        return sum;
+    }
+    static int gcd(int a,int b){
+        while(b!=0){
+            int temp = b;
+            b=a%b;
+            a = temp;
+        }
+        return a;
+    }
+}
