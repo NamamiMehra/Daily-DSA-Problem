@@ -1,0 +1,27 @@
+class Solution {
+    public int countRatioSubarrays(int[] nums, int a, int b) {
+        int count = 0;
+        int n = nums.length;
+        for(int i=0;i<n;i++){
+              int countodd = 0;
+                int counteven = 0;
+            for(int j=i;j<n;j++){
+                
+                    if(nums[j]%2==0){
+                         counteven++;
+                    }
+                    else{
+                        countodd++;
+                    }
+                 if(countodd==0)continue;
+                 double ss = (double)(counteven/countodd);
+                 double pp =  (double)(a/b);
+                 if ((long)counteven * b <= (long)countodd * a){
+                    count++;
+                }
+            }
+         }
+            
+        return count;
+    }
+}
