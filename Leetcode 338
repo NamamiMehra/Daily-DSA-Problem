@@ -1,0 +1,19 @@
+class Solution {
+    public int[] countBits(int n) {
+        int[] ans = new int[n+1];
+        for(int i=0;i<=n;i++){
+            ans[i]=bits(i);
+        }
+        return ans;
+
+    }
+    static int bits(int n){
+        int count = 0;
+        for(int j=0;j<32;j++){
+             if(((1<<j)&n)!=0){
+                count++;
+             }
+        }
+        return count;
+    }
+}
