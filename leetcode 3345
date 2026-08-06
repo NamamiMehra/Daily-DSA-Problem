@@ -1,0 +1,21 @@
+class Solution {
+    public int smallestNumber(int n, int t) {
+        int min = Integer.MAX_VALUE;
+        for(int i=n;i<=100;i++){
+            int prod = digitproduct(i);
+            if(prod%t==0){
+                return i;
+            }
+        }
+      return min;
+    }
+    static int digitproduct(int n){
+        int product = 1;
+        while(n>0){
+            int digit = n%10;
+            product = product*digit;
+            n=n/10;
+        }
+        return product;
+    }
+}
