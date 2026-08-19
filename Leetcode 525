@@ -1,0 +1,33 @@
+class Solution {
+    public int findMaxLength(int[] nums) {
+        int max = Integer.MIN_VALUE;
+        int count = 0;
+        int k=0;
+        Map<Integer,Integer> hmap = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+             if(nums[i]==0){
+                nums[i]=-1;
+             }
+        }
+        int prefixsum=0;
+        int maxlength=0;
+        for(int i=0;i<nums.length;i++){
+            prefixsum+=nums[i];
+            int complement = prefixsum-k;
+            if(prefixsum==0){
+                maxlength=i+1;
+            }
+            if(hmap.containsKey(complement)){
+                int length = i-hmap.get(complement);
+                maxlength = Math.max(maxlength,length);
+    
+                max = Math.max(max,maxlength);
+            }
+            if(!hmap.containsKey(complement)){
+                hmap.put(complement,i);
+            }
+        }   
+        max=Math.max(max,maxlength);
+        return max==Integer.MIN_VALUE?maxlength:max;
+    }
+}
